@@ -1,0 +1,196 @@
+basePath: /
+definitions:
+  web.calcResponse:
+    properties:
+      result:
+        type: integer
+    required:
+    - result
+    type: object
+  web.errorResponse:
+    properties:
+      message:
+        type: string
+      status_code:
+        type: string
+    type: object
+  web.stackPopResponse:
+    properties:
+      popped_number:
+        type: integer
+    type: object
+  web.stackPushRequest:
+    properties:
+      number:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Roosh's API
+  title: Roosh API
+  version: "1.0"
+paths:
+  /calc/add:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: calcAdd
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.calcResponse'
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Adds top two numbers from the stack of calculators memory
+      tags:
+      - calc
+  /calc/div:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: calcDiv
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.calcResponse'
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Divides top two numbers from the stack of calculators memory
+      tags:
+      - calc
+  /calc/multip:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: calcMultip
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.calcResponse'
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Multiplies top two numbers from the stack of calculators memory
+      tags:
+      - calc
+  /calc/subs:
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: calcSubs
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.calcResponse'
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Subtracts top two numbers from the stack of calculators memory
+      tags:
+      - calc
+  /stack:
+    delete:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: stackPop
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.stackPopResponse'
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Pops a number from the stack
+      tags:
+      - stack
+    get:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: stackFetch
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Succesfully printed stack
+        "400":
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Prints all numbers from stack
+      tags:
+      - stack
+    post:
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      operationId: stackAdd
+      parameters:
+      - description: Number to add to the stack
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/web.stackPushRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Succesfully added number to stack
+        default:
+          description: Internal server error
+      summary: Adds a number to the stack
+      tags:
+      - stack
+swagger: "2.0"
